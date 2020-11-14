@@ -15,6 +15,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     // 使用eslint的质量检查，不使用风格检查，风格检查交给vetur
     'comma-dangle':0,
-    "space-before-function-paren":0
+    "space-before-function-paren":0,
+    "prefer-const":0
   }
 }
