@@ -41,11 +41,11 @@ export default {
 .user {
   background-color: pink;
   .user_offset {
-    background-color: red;
+    // background-color: red;
     position: fixed;
     left: 8%;
     width: 17%;
-    height: 100%;
+    height: 100vh;
   }
 }
 // 用户核心功能组件
