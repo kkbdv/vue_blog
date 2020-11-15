@@ -2,17 +2,17 @@
   <div class="bgc">
     <el-row>
       <!-- 左侧用户区 -->
-      <el-col :span="6" class="user">
+      <el-col :span="7" class="user">
         <div class="user_offset">
           <user></user>
         </div>
       </el-col>
       <!-- 中间核心功能区 -->
-      <el-col :span="12" :offset="6" class="core">
+      <el-col :span="10" :offset="7" class="core">
         <core></core>
       </el-col>
       <!-- 右侧工具栏区 -->
-      <el-col :span="6" class="tool">
+      <el-col :span="7" class="tool">
         <div class="tool_bar">
           <tool></tool>
         </div>
@@ -43,7 +43,7 @@ export default {
   .user_offset {
     // background-color: red;
     position: fixed;
-    left: 8%;
+    left: 12.2%;
     width: 17%;
     height: 100vh;
   }
@@ -51,12 +51,13 @@ export default {
 // 用户核心功能组件
 .core {
   background-color: #E6ECF0;
+  border-right: 1px solid #E6ECF0;
 }
 // 用户工具功能组件
 .tool {
-  background-color: #303F9F;
+  padding-left: 25px;
+  width: 16%;
   .tool_bar {
-    background-color: #303F9F;
     // 帮助子组件Tool找定位
     position: relative;
   }

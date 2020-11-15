@@ -14,7 +14,7 @@
             <el-image style="width: 60px; height: 60px; border-radius: 40px" :src="url" fit="cover"></el-image>
           </el-col>
           <el-col :span="21" :offset="1">
-            <el-input type="textarea" :autosize="{ minRows: 3 }" placeholder="今天的心情~" v-model="textarea" resize="none" :show-word-limit="true" :maxlength="140"> </el-input>
+            <el-input type="textarea" autosize placeholder="有什么新鲜事？" v-model="textarea" resize="none" :show-word-limit="true" :maxlength="140"> </el-input>
 
             <!-- 图片上传区 -->
             <el-upload
@@ -91,7 +91,7 @@ export default {
     return {
       // 输入框
       textarea: '',
-      url: 'https://w.wallhaven.cc/full/m9/wallhaven-m9qq5k.png',
+      url: 'https://img.dpm.org.cn/Uploads/Picture/2019/04/04/s5ca5735ab039b.jpg',
       busy: false,
       data: [1],
       // 图片区
@@ -100,15 +100,15 @@ export default {
       isShowUpload: false,
       // 微博区
       blogList: [
-        { id: 1, content: '12312313', imgUrl: [{ id: 1, url: 'https://w.wallhaven.cc/full/m9/wallhaven-m9qq5k.png' }] },
+        { id: 1, content: '12312313', imgUrl: [{ id: 1, url: 'https://img.dpm.org.cn/Uploads/Picture/2020/10/29/s5f9a1e3a38307.jpg' }] },
         {
           id: 2,
           content: '12312313',
           imgUrl: [
-            { id: 1, url: 'https://w.wallhaven.cc/full/m9/wallhaven-m9qq5k.png' },
-            { id: 2, url: 'https://w.wallhaven.cc/full/m9/wallhaven-m9qq5k.png' },
-            { id: 3, url: 'https://w.wallhaven.cc/full/m9/wallhaven-m9qq5k.png' },
-            { id: 4, url: 'https://w.wallhaven.cc/full/m9/wallhaven-m9qq5k.png' },
+            { id: 1, url: 'https://img.dpm.org.cn/Uploads/Picture/2020/10/29/s5f9a1d3aaac40.jpg' },
+            { id: 2, url: 'https://img.dpm.org.cn/Uploads/Picture/2020/10/29/s5f9a1f0acecb4.jpg' },
+            { id: 3, url: 'https://img.dpm.org.cn/Uploads/Picture/2020/08/05/s5f2a7535e4f17.jpg' },
+            { id: 4, url: 'https://img.dpm.org.cn/Uploads/Picture/2020/08/05/s5f2a76975dc61.jpg' },
           ],
         },
       ],
@@ -280,6 +280,16 @@ export default {
     img {
       width: 20px;
     }
+  }
+}
+/deep/.el-textarea__inner {
+  border: 0;
+  font-size: 18px;
+  color: #14171A;
+  &::placeholder {
+    color: #657786;
+    font-weight: 700;
+    font-size: 19px;
   }
 }
 </style>
