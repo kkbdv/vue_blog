@@ -6,7 +6,7 @@
     </div>
     <!-- 菜单栏 -->
     <div class="main">
-      <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="white" active-text-color="#0091ea">
+      <el-menu default-active="1" class="el-menu-vertical-demo" background-color="white" active-text-color="#0091ea">
         <el-menu-item index="1">
           <img class="nav_icon" src="../assets/image/home.png" alt="" />
           <span>主页</span>
@@ -29,7 +29,7 @@
       <!-- 用户状态信息 -->
     </div>
     <div class="footer">
-      <el-image class="avatar" :src="url" :preview-src-list="srcList"> </el-image>
+      <el-image class="avatar" :src="url" :preview-src-list="srcList" :z-index="999"> </el-image>
 
       <div class="name">
         <p>匿名用户</p>
@@ -42,8 +42,9 @@
 export default {
   data: () => ({
     url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    srcList: ['https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg', 'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'],
+    srcList: ['https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg'],
   }),
+  methods: {},
 }
 </script>
 <style lang="less" scoped>
@@ -51,6 +52,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  border-right: 1px solid #E6ECF0;
 }
 .main {
   flex: 1;
@@ -63,6 +65,9 @@ export default {
   width: 23px;
   margin-right: 15px;
 }
+.el-menu {
+  border: 0;
+}
 .el-menu-item {
   font-weight: 700;
   font-size: 17px;
@@ -73,12 +78,9 @@ export default {
   color: #0091ea !important;
 }
 .el-button {
-  padding: 12px 90px;
-  position: relative;
-  top: 30px;
-  left: 50%;
-  margin-left: -124px;
+  padding: 15px 90px;
   font-weight: 700;
+  margin-top: 5vh;
   color: white;
   background-color: #1DA1F2;
 }

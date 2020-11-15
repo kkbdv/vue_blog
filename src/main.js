@@ -4,7 +4,7 @@ import router from './router'
 import './plugin/element.js'
 // import 'element-ui/lib/theme-chalk/index.css'
 import '../theme/index.css'
-import '../src/assets/css/global.css'
+import '../src/assets/css/global.less'
 Vue.config.productionTip = false
 
 new Vue({

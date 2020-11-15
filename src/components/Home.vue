@@ -50,7 +50,7 @@ export default {
 }
 // 用户核心功能组件
 .core {
-  background-color: lightblue;
+  background-color: #E6ECF0;
 }
 // 用户工具功能组件
 .tool {

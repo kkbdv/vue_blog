@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="one">搜索框</div>
-    <div ref="hot" :class="{ position_fixed: isActive }">热门</div>
+    <div class="search"></div>
+    <div ref="hot" :class="{ position_fixed: isActive }" @click="handle">热门</div>
     <div>广告</div>
     <div>返回顶部</div>
   </div>
@@ -26,6 +26,9 @@ export default {
         this.isActive = false
       }
       console.log(this.isActive)
+    },
+    handle() {
+      console.log('121')
     },
   },
   mounted() {
