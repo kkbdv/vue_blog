@@ -35,11 +35,17 @@
             <!-- 工具条区 -->
             <div class="tool">
               <ul>
-                <li @click="showUpload"><img src="../assets/image/picture.png" alt="" /></li>
-                <li><img src="../assets/image/smile.png" alt="" /></li>
-                <li><img src="../assets/image/browse.png" alt="" /></li>
+                <li @click="showUpload"><span class="iconfont" :class="[isActive === 1 ? 'icon-picture-filling' : 'icon-picture']"></span></li>
+                <!-- 表情区 -->
+                <el-popover placement="bottom" width="200" trigger="click">
+                  <div class="emoji">
+                    <span :key="i" @click="handleEmoji(i)" v-for="(itme, i) in emojis">{{ itme }}</span>
+                  </div>
+                  <li slot="reference" @click="handleActive(2)"><span class="iconfont" :class="[isActive === 2 ? 'icon-smile-filling' : 'icon-smile']"></span></li>
+                </el-popover>
+                <li @click="handleActive(3)"><span class="iconfont" :class="[isActive === 3 ? 'icon-hide' : 'icon-browse']"></span></li>
               </ul>
-              <el-button type="primary" size="mini">发送</el-button>
+              <el-button size="mini" @click="handleSend">发送</el-button>
             </div>
           </el-col>
         </el-row>
@@ -61,8 +67,7 @@
             </div>
             <!-- 文章 -->
             <div class="blog_text">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias expedita ab hic quos voluptate dolore, laboriosam quia assumenda dignissimos qui non, perspiciatis veniam beatae
-              consequatur harum, nobis odit vel iure?
+              {{ item.content }}
             </div>
             <!-- 图片 -->
             <div class="blog_pic">
@@ -71,16 +76,26 @@
             <!-- 操作 -->
             <div class="operate">
               <ul>
-                <li><img src="../assets/image/smile.png" alt="" /></li>
-                <li><img src="../assets/image/meh.png" alt="" /></li>
-                <li><img src="../assets/image/comment.png" alt="" /></li>
-                <li><img src="../assets/image/share.png" alt="" /></li>
+                <li><span class="iconfont icon-smile"></span><span class="number">123</span></li>
+                <li><span class="iconfont icon-meh"></span><span class="number">123</span></li>
+                <li><span class="iconfont icon-comment"></span><span class="number">123</span></li>
+                <li><span class="iconfont icon-share"></span><span class="number">123</span></li>
               </ul>
             </div>
           </el-col>
         </el-row>
       </div>
     </div>
+    <!-- 对话框 -->
+    <el-dialog title="提示" :visible.sync="editVisible" width="30%" @close="handleColse">
+      <span>
+        <el-input type="textarea" autosize placeholder="有什么新鲜事？" v-model="textarea2" resize="none" :show-word-limit="true" :maxlength="140"> </el-input>
+      </span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -91,6 +106,8 @@ export default {
     return {
       // 输入框
       textarea: '',
+      // 第二个输入框
+      textarea2: '',
       url: 'https://img.dpm.org.cn/Uploads/Picture/2019/04/04/s5ca5735ab039b.jpg',
       busy: false,
       data: [1],
@@ -111,6 +128,7 @@ export default {
             { id: 4, url: 'https://img.dpm.org.cn/Uploads/Picture/2020/08/05/s5f2a76975dc61.jpg' },
           ],
         },
+        { id: 3, content: '12312313', imgUrl: [] },
       ],
       // 图片数组长度
       picClass1: {
@@ -125,9 +143,28 @@ export default {
       picClass4: {
         four_pic: true,
       },
+      // 图标激活状态
+      isActive: 0,
+      // 表情数组
+      emojis: ['😀', '😅', '😍', '🤑', '🥵', '💩', '😱'],
+      // 发送微博对象
+      blogForm: {
+        id: 99,
+        content: '',
+        imgUrl: [],
+      },
     }
   },
-  computed: {},
+  computed: {
+    editVisible: {
+      get() {
+        return this.$root.editVisible
+      },
+      set(v) {
+        this.$root.editVisible = v
+      },
+    },
+  },
   methods: {
     // loadMore: function () {
     //   var self = this
@@ -159,6 +196,7 @@ export default {
     // 显示图片上传框
     showUpload() {
       this.isShowUpload = !this.isShowUpload
+      this.handleActive(1)
     },
     handlPicClass(len) {
       if (len === 1) {
@@ -170,10 +208,36 @@ export default {
       }
       return this.picClass4
     },
+    // 关闭对话框清理输入
+    handleColse() {
+      this.textarea2 = ''
+    },
+    // 处理激活状态
+    handleActive(id) {
+      this.isActive = id
+    },
+    // 处理表情
+    handleEmoji(id) {
+      this.textarea += this.emojis[id]
+    },
+    // 发送微博事件
+    handleSend() {
+      if (this.textarea.length > 0) {
+        this.blogForm.id = this.blogForm.id + 3
+        console.log(this.textarea)
+        this.blogForm.content = this.textarea
+        this.blogList.unshift(this.blogForm)
+        this.blogForm.content = ''
+      }
+    },
   },
   directives: { infiniteScroll },
   components: {
     'k-header': kHeader,
+  },
+  created() {
+    this.$root.isShowSend = true
+    console.log('我是Core create')
   },
 }
 </script>
@@ -215,6 +279,9 @@ export default {
       margin: 0 5px;
       img {
         width: 28px;
+      }
+      .iconfont {
+        font-size: 24px;
       }
     }
   }
@@ -277,8 +344,14 @@ export default {
   ul {
     display: flex;
     justify-content: space-around;
-    img {
-      width: 20px;
+
+    .iconfont {
+      font-size: 20px;
+    }
+    .number {
+      font-size: 14px;
+      color: #659EC7;
+      margin-left: 5px;
     }
   }
 }
@@ -290,6 +363,12 @@ export default {
     color: #657786;
     font-weight: 700;
     font-size: 19px;
+  }
+}
+.emoji {
+  span {
+    margin: 2px;
+    cursor: pointer;
   }
 }
 </style>

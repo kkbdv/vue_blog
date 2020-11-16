@@ -34,7 +34,7 @@
       </el-carousel>
     </div>
     <!-- 返回顶部按钮 -->
-    <div class="page-component__scroll">返回顶部</div>
+
     <el-backtop :right="200">
       <div
         style="

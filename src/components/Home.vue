@@ -9,7 +9,7 @@
       </el-col>
       <!-- 中间核心功能区 -->
       <el-col :span="10" :offset="7" class="core">
-        <core></core>
+        <router-view></router-view>
       </el-col>
       <!-- 右侧工具栏区 -->
       <el-col :span="7" class="tool">
@@ -23,7 +23,7 @@
 <script>
 import User from '../components/User.vue'
 import Tool from '../components/Tool.vue'
-import Core from '../components/Core.vue'
+// import Core from '../components/Core.vue'
 export default {
   data() {
     return {}
@@ -31,7 +31,7 @@ export default {
   components: {
     user: User,
     tool: Tool,
-    core: Core,
+    // core: Core,
   },
 }
 </script>
