@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Button, Row, Col, MenuItem, Menu, Submenu, MenuItemGroup, Image, Input, Dialog, Upload, Carousel, CarouselItem, Backtop, Popover } from 'element-ui'
+import { Button, Row, Col, MenuItem, Menu, Submenu, MenuItemGroup, Image, Input, Dialog, Upload, Carousel, CarouselItem, Backtop, Popover, Form, FormItem, Radio, RadioGroup, DatePicker, Message, TabPane, Tabs, InfiniteScroll } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Row)
@@ -15,4 +15,13 @@ Vue.use(Upload)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
 Vue.use(Backtop)
+Vue.use(Form)
+Vue.use(FormItem)
 Vue.use(Popover)
+Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(DatePicker)
+Vue.use(TabPane)
+Vue.use(Tabs)
+Vue.use(InfiniteScroll)
+Vue.prototype.$message = Message

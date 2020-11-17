@@ -56,7 +56,7 @@
       <div class="blog_block" :key="item.id" v-for="item in blogList">
         <el-row>
           <el-col :span="2">
-            <el-image style="width: 50px; height: 50px; border-radius: 40px" :src="url" fit="cover"></el-image>
+            <el-image @click="toOtherUser" style="width: 50px; height: 50px; border-radius: 40px" :src="url" fit="cover"></el-image>
           </el-col>
           <el-col :span="21" :offset="1">
             <!-- 昵称/账户/发布日期 -->
@@ -78,7 +78,7 @@
               <ul>
                 <li><span class="iconfont icon-smile"></span><span class="number">123</span></li>
                 <li><span class="iconfont icon-meh"></span><span class="number">123</span></li>
-                <li><span class="iconfont icon-comment"></span><span class="number">123</span></li>
+                <li @click="showComment"><span class="iconfont icon-comment"></span><span class="number">123</span></li>
                 <li><span class="iconfont icon-share"></span><span class="number">123</span></li>
               </ul>
             </div>
@@ -94,6 +94,37 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="editVisible = false">取 消</el-button>
         <el-button type="primary" @click="editVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!-- 评论框 -->
+    <el-dialog title="评论" :visible.sync="commentVisible" width="30%">
+      <span>
+        <el-row>
+          <el-col :span="2">
+            <el-image style="width: 40px; height: 40px; border-radius: 40px" :src="url" fit="cover"></el-image>
+          </el-col>
+          <el-col :span="21" :offset="1">
+            <el-input type="textarea" autosize placeholder="输入回复" v-model="commentArea" resize="none" :show-word-limit="true" :maxlength="140"> </el-input>
+          </el-col>
+        </el-row>
+        <!-- 评论区 -->
+        <div class="otheComment">
+          <!-- 循环体 -->
+          <el-row class="substance" v-for="item in CommentList" :key="item.id">
+            <el-col :span="2">
+              <el-image style="width: 40px; height: 40px; border-radius: 40px" :src="item.url" fit="cover"></el-image>
+            </el-col>
+            <el-col :span="21" :offset="1">
+              <p>
+                {{ item.content }}
+              </p>
+            </el-col>
+          </el-row>
+        </div>
+      </span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="commentVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleCommit">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -153,6 +184,10 @@ export default {
         content: '',
         imgUrl: [],
       },
+      // 评论区
+      commentArea: '',
+      commentVisible: false,
+      CommentList: [{ id: 1, url: '', content: '1' }],
     }
   },
   computed: {
@@ -230,6 +265,16 @@ export default {
         this.blogForm.content = ''
       }
     },
+    toOtherUser() {
+      console.log('222')
+      this.$router.push('/home/userset')
+    },
+    // 打开评论框
+    showComment() {
+      this.commentVisible = true
+    },
+    // 发表评论
+    handleCommit() {},
   },
   directives: { infiniteScroll },
   components: {
@@ -255,19 +300,19 @@ export default {
   margin-bottom: 15px;
 }
 .blog_block {
-  border-bottom: 1px solid #E6ECF0;
+  border-bottom: 1px solid #e6ecf0;
   padding-top: 15px;
 }
 .tool {
   margin-top: 15px;
   padding-top: 15px;
-  border-top: 1px solid #E6ECF0;
+  border-top: 1px solid #e6ecf0;
   display: flex;
   justify-content: space-between;
   .el-button {
     color: white;
     padding: 15px 50px;
-    background-color: #1DA1F2;
+    background-color: #1da1f2;
     font-weight: bold;
     font-size: 15px;
   }
@@ -297,7 +342,7 @@ export default {
   .account,
   .date {
     margin: 0 5px;
-    color: #8996A2;
+    color: #8996a2;
     font-size: 14px;
   }
 }
@@ -350,25 +395,42 @@ export default {
     }
     .number {
       font-size: 14px;
-      color: #659EC7;
+      color: #659ec7;
       margin-left: 5px;
+    }
+    li {
+      cursor: pointer;
     }
   }
 }
 /deep/.el-textarea__inner {
   border: 0;
   font-size: 18px;
-  color: #14171A;
+  color: #14171a;
   &::placeholder {
     color: #657786;
     font-weight: 700;
     font-size: 19px;
   }
 }
+// 表情
 .emoji {
   span {
     margin: 2px;
     cursor: pointer;
+  }
+}
+// 评论
+.otheComment {
+  height: 200px;
+  overflow: auto;
+  margin-top: 15px;
+  .substance {
+    margin-bottom: 15px;
+    p {
+      border-left: 2px solid gray;
+      padding-left: 10px;
+    }
   }
 }
 </style>

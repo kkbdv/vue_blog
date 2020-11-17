@@ -76,7 +76,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  border-right: 1px solid #E6ECF0;
+  border-right: 1px solid #e6ecf0;
 }
 .main {
   flex: 1;
@@ -110,7 +110,7 @@ export default {
   font-weight: 700;
   margin-top: 5vh;
   color: white;
-  background-color: #1DA1F2;
+  background-color: #1da1f2;
 }
 //用户状态信息
 .footer {
@@ -122,6 +122,7 @@ export default {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    cursor: pointer;
   }
   .name {
     font-size: 16px;
@@ -129,7 +130,7 @@ export default {
     .user_id {
       font-size: 14;
       font-weight: 400;
-      color: #D0D0D0;
+      color: #d0d0d0;
     }
   }
 }
@@ -141,7 +142,7 @@ export default {
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #E6ECF0;
+    border-bottom: 1px solid #e6ecf0;
     &:last-child {
       border: 0;
     }
@@ -149,7 +150,7 @@ export default {
   .logout {
     padding: 10px 60px;
     margin-top: 0;
-    background-color: #A6A9AD;
+    background-color: #a6a9ad;
   }
   .logout:hover {
     background-color: #babec3;
